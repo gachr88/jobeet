@@ -3,9 +3,6 @@
 This repository is about setting up a PHP env for jobeet tutorial with doctrine.
 You'll find a tutorial to create a blog on https://symfony.com/legacy/doc/jobeet?orm=Doctrine and a gentle introduction at https://symfony.com/legacy/doc/gentle-introduction
 
-Please have a look at the documentation and try on docker to get an impression. Pick what you think is interesting for you, read about it and make some tests. Then tell which links you prepared, and I will ask questions.
-This can be only one link or more - depending on how much time you can invest.
-
 #### Setup docker
 Assuming docker is installed on your machine, you can use a development environment with docker.
 Clone the repostory. Inside the project directory execute:
