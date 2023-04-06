@@ -5,6 +5,9 @@
 <?php end_slot(); ?>
 
 <div id="job">
+  <?php if ($sf_request->getParameter('token') == $job->getToken()) : ?>
+    <?php include_partial('job/admin', array('job' => $job)) ?>
+  <?php endif ?>
   <h1><?php echo $job->getCompany() ?></h1>
   <h2><?php echo $job->getLocation() ?></h2>
   <h3>
@@ -33,8 +36,6 @@
   </div>
 
   <div style="padding: 20px 0">
-    <a href="<?php echo url_for('job/edit?id=' . $job->getId()) ?>">
-      Edit
-    </a>
+    <a href="<?php echo url_for('job_edit', $job) ?>">Edit</a>
   </div>
 </div>

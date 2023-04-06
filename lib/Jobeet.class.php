@@ -12,7 +12,8 @@ class Jobeet
     $text = str_replace(
       explode(' ', preg_replace('/ +/', ' ', 'č ć ž š đ  Č Ć Ž Š Đ  à á â ã ä ç è é ê ë ì í î ï ñ ò ó ô õ ö ù ú û ü ý ÿ À Á Â Ã Ä Ç È É Ê Ë Ì Í Î Ï Ñ Ò Ó Ô Õ Ö Ù Ú Û Ü Ý')),
       explode(' ', preg_replace('/ +/', ' ', 'c c z s dj C C Z S DJ a a a a a c e e e e i i i i n o o o o o u u u u y y A A A A A C E E E E I I I I N O O O O O U U U U Y')),
-      $text);
+      $text
+    );
     // lowercase
     $text = strtolower($text);
 
@@ -24,5 +25,32 @@ class Jobeet
     }
 
     return $text;
+  }
+
+  public function getTypeName()
+  {
+    $types = Doctrine_Core::getTable('JobeetJob')->getTypes();
+    return $this->getType() ? $types[$this->getType()] : '';
+  }
+
+  public function isExpired()
+  {
+    return $this->getDaysBeforeExpires() < 0;
+  }
+
+  public function expiresSoon()
+  {
+    return $this->getDaysBeforeExpires() < 5;
+  }
+
+  public function getDaysBeforeExpires()
+  {
+    return ceil(($this->getDateTimeObject('expires_at')->format('U') - time()) / 86400);
+  }
+
+  public function publish()
+  {
+    $this->setIsActivated(true);
+    $this->save();
   }
 }
